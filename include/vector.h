@@ -49,22 +49,22 @@ public:
     }
 
     ~Vector() {
-        if (_inform!= 0 ){
+
             delete[] _inform;
-        }
+
     }
 
     Vector<T>& operator=(const Vector& other) { // контейнеры тоже меняются всегда
-        Vector <T> a(other);
+        Vector  a(other);
         this->swap(a);
         return *this;
     }
 
     Vector<T>& operator=(Vector&& other) noexcept {
         if (&other != this){
-            if (_inform !=0 ) {
+
                 delete[] _inform;
-            }
+
         }
         _size = other._size;
         _capacity = other._capacity;
@@ -98,7 +98,7 @@ public:
         return _inform [pos];
     }
 
-    reference front() noexcept {// доступ к первому элементу
+    reference front() noexcept {
         return _inform[0];
     }
 
@@ -106,7 +106,7 @@ public:
         return _inform[0];
     }
 
-    reference back() noexcept {//доступ к последнему элементу
+    reference back() noexcept {
         return _inform[_size - 1];
     }
 
@@ -114,7 +114,7 @@ public:
         return _inform[_size - 1];
     }
 
-    pointer data() noexcept { // указатель на начало(end - no)
+    pointer data() noexcept {
         return _inform;
     }
 
@@ -142,14 +142,15 @@ public:
         _size = 0;
     }
 
-    void push_back(const value_type& value){// всавка элемента в конец вектора
+    void push_back(const value_type& value){
       if (_capacity > _size){
           _inform[_size] = value;
           _size++;
       }
       else {
         size_type n = _size;
-        Vector <T> b (n * 2); // новый нулевой вектор
+
+        Vector  b (n * 2); // новый нулевой вектор
         for (unsigned int i = 0; i < n; i++){
             b._inform [i] = _inform[i];
         }
