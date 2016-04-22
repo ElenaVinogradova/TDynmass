@@ -148,12 +148,12 @@ public:
           _size++;
       }
       else {
-		if (_size == 0){
-			size_type n = 1;	
-		}  
-		else {
-			size_type n = _size;	
-		}
+        if (_size == 0){
+            size_type n = 1;    
+        }  
+        else {
+             n = _size;    
+        }
         Vector  b (n * 2); 
         for (unsigned int i = 0; i < n; i++){
             b._inform [i] = _inform[i];
@@ -176,4 +176,4 @@ private:
     size_type _capacity;
 
 };
-#endif //VECTOR_MY
+#endif //VECTOR_MY	
