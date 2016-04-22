@@ -148,11 +148,12 @@ public:
                 }
                 b[n] = value;
                 _size= n + 1;
+                this->swap(b);
             }  
             else {
                 Vector b(1, value);
-            }
-            this->swap(b);    
+                this->swap(b);
+            }    
         }
     }
 
