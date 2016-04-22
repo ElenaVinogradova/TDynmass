@@ -148,15 +148,19 @@ public:
           _size++;
       }
       else {
-        size_type n = _size;
-
-        Vector  b (n * 2); // новый нулевой вектор
+		if (_size == 0){
+			size_type n = 1;	
+		}  
+		else {
+			size_type n = _size;	
+		}
+        Vector  b (n * 2); 
         for (unsigned int i = 0; i < n; i++){
             b._inform [i] = _inform[i];
         }
         b [n] = value;
         this->swap(b);
-        _size= n+1;
+        _size= n + 1;
       }
     }
 
