@@ -139,20 +139,20 @@ public:
             _inform[_size] = value;
             _size++;
         }
-        else if (_size != 0) {
-                n = _size;    
-                Vector b(n * 2); 
-                for (unsigned int i = 0; i < n; i++) {
-                    b._inform[i] = _inform[i];
-                }
-                b[n] = value;
-                _size= n + 1;
-                this->swap(b);
-            }  
-            else {
-                Vector b(1, value);
-                this->swap(b);
-            }   
+        if (_capacity <= _size) {
+            n = _size;    
+            Vector b(n * 2); 
+            for (unsigned int i = 0; i < n; i++) {
+                b._inform[i] = _inform[i];
+            }
+            b[n] = value;
+            _size= n + 1;
+            this->swap(b);
+        }  
+        if (0 == _size) {
+            Vector b(1, value);
+            this->swap(b);
+        }   
     }
 
     void swap(Vector& other) {
