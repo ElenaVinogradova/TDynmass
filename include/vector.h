@@ -140,10 +140,7 @@ public:
             _size++;
         }
         else {
-            if (_size == 0) {
-                Vector b(1, value); 
-            }  
-            else {
+            if (_size != 0) {
                 n = _size;    
                 Vector b(n * 2); 
                 for (unsigned int i = 0; i < n; i++) {
@@ -151,6 +148,9 @@ public:
                 }
                 b[n] = value;
                 _size= n + 1;
+            }  
+            else {
+                Vector b(1, value);
             }
             this->swap(b);    
         }
