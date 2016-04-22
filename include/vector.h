@@ -134,27 +134,20 @@ public:
     }
 
     void push_back(const value_type& value){
-        size_type n;
-        if (_capacity > _size) {
-            _inform[_size] = value;
-            _size++;
+      if (_capacity > _size){
+          _inform[_size] = value;
+          _size++;
+      }
+      else {
+        size_type n = _size;
+        Vector <T> b (n * 2); 
+        for (unsigned int i = 0; i < n; i++){
+            b._inform[i] = _inform[i];
         }
-        else {
-            if (_size != 0) {
-                n = _size;    
-                Vector b(n * 2); 
-                for (unsigned int i = 0; i < n; i++) {
-                    b._inform[i] = _inform[i];
-                }
-                b[n] = value;
-                _size= n + 1;
-                this->swap(b);
-            }  
-            else {
-                Vector b(1, value);
-                this->swap(b);
-            }    
-        }
+        b [n] = value;
+        this->swap(b);
+        _size = n+1;
+      }
     }
 
     void swap(Vector& other) {
