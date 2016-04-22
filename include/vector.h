@@ -16,7 +16,7 @@ public:
     using const_pointer = const value_type*;
 
     Vector():_capacity(0), _size(0) {
-        _inform=0;
+        _inform = 0;
     }
 
     explicit Vector(size_type count):_capacity(count),_size(count) {
@@ -141,7 +141,7 @@ public:
         }
         else {
             if (_size == 0) {
-                Vector b(1, value) 
+                Vector b(1, value); 
             }  
             else {
                 n = _size;    
@@ -149,7 +149,7 @@ public:
                 for (unsigned int i = 0; i < n; i++) {
                     b._inform[i] = _inform[i];
                 }
-                b [n] = value;
+                b[n] = value;
                 _size= n + 1;
             }
             this->swap(b);    
