@@ -40,7 +40,7 @@ public:
         }
     }
 
-    Vector(Vector &&other) noexcept :_size(other._size), _capacity( other._capacity), _inform(other._inform)  {
+    Vector(Vector &&other) noexcept :_size(other._size), _capacity( other._capacity), _inform(other._inform) {
         other._size = 0;
         other._capacity = 0;
         other._inform = nullptr;
@@ -48,7 +48,6 @@ public:
 
     ~Vector() {
         delete[] _inform;
-
     }
 
     Vector<T>& operator=(const Vector& other) { 
@@ -58,7 +57,7 @@ public:
     }
 
     Vector<T>& operator=(Vector&& other) noexcept {
-        if (&other != this){
+        if (&other != this) {
                 delete[] _inform;
         }
         _size = other._size;
@@ -78,19 +77,17 @@ public:
     }
 
     reference at(size_type pos) {
-        if (pos >= _size)
-        {
+        if (pos >= _size) {
             throw std::out_of_range("positon >= size of vector");
         }
-        return _inform [pos];
+        return _inform[pos];
     }
 
     const_reference at(size_type pos) const {
-        if (pos >= _size)
-        {
+        if (pos >= _size) {
             throw std::out_of_range("positon >= size of vector");
         }
-        return _inform [pos];
+        return _inform[pos];
     }
 
     reference front() noexcept {
@@ -118,8 +115,7 @@ public:
     }
 
     bool empty() const noexcept {
-        if (_size == 0)
-        {
+        if (_size == 0) {
             return true;
         }
         return false;
@@ -138,29 +134,29 @@ public:
     }
 
     void push_back(const value_type& value){
-      size_type n;
-      if (_capacity > _size){
-          _inform[_size] = value;
-          _size++;
-      }
-      else {
-        if (_size == 0){
-             n = 1;    
-        }  
+        size_type n;
+        if (_capacity > _size) {
+            _inform[_size] = value;
+            _size++;
+        }
         else {
-             n = _size;    
+            if (_size == 0) {
+                Vector b(1, value) 
+            }  
+            else {
+                n = _size;    
+                Vector b(n * 2); 
+                for (unsigned int i = 0; i < n; i++) {
+                    b._inform[i] = _inform[i];
+                }
+                b [n] = value;
+                _size= n + 1;
+            }
+            this->swap(b);    
         }
-        Vector  b (n * 2); 
-        for (unsigned int i = 0; i < n; i++){
-            b._inform [i] = _inform[i];
-        }
-        b [n] = value;
-        this->swap(b);
-        _size= n + 1;
-      }
     }
 
-    void swap(Vector& other){
+    void swap(Vector& other) {
         std::swap(_inform, other._inform);
         std::swap(_capacity,other._capacity);
         std::swap(_size, other._size);
@@ -170,6 +166,5 @@ private:
     value_type* _inform;
     size_type _size;
     size_type _capacity;
-
 };
 #endif //VECTOR_MY	
