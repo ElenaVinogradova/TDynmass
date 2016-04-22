@@ -21,23 +21,21 @@ public:
 
     explicit Vector(size_type count):_capacity(count),_size(count) {
         _inform = new value_type[count];
-        for (unsigned int i = 0; i<count; i++){
+        for (unsigned int i = 0; i < count; i++) {
             _inform[i] = 0;
         }
     }
 
     Vector(size_type count, const value_type& value):_capacity(count),_size(count) {
         _inform = new value_type[count];
-        for (unsigned int i = 0; i < count; i++)
-        {
+        for (unsigned int i = 0; i < count; i++) {
             _inform[i] = value;
         }
     }
 
     Vector(const Vector& other):_capacity(other._size),_size(other._capacity) {
         _inform = new value_type[_capacity];
-        for (unsigned int i = 0; i < _size; i++)
-        {
+        for (unsigned int i = 0; i < _size; i++){
             _inform[i] = other._inform[i];
         }
     }
@@ -49,12 +47,11 @@ public:
     }
 
     ~Vector() {
-
-            delete[] _inform;
+        delete[] _inform;
 
     }
 
-    Vector<T>& operator=(const Vector& other) { // контейнеры тоже меняются всегда
+    Vector<T>& operator=(const Vector& other) { 
         Vector  a(other);
         this->swap(a);
         return *this;
@@ -62,9 +59,7 @@ public:
 
     Vector<T>& operator=(Vector&& other) noexcept {
         if (&other != this){
-
                 delete[] _inform;
-
         }
         _size = other._size;
         _capacity = other._capacity;
@@ -143,13 +138,14 @@ public:
     }
 
     void push_back(const value_type& value){
+      size_type n;
       if (_capacity > _size){
           _inform[_size] = value;
           _size++;
       }
       else {
         if (_size == 0){
-            size_type n = 1;    
+             n = 1;    
         }  
         else {
              n = _size;    
