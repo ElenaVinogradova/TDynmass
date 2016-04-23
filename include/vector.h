@@ -19,21 +19,21 @@ public:
         _inform = 0;
     }
 
-    explicit Vector(size_type count):_capacity(count),_size(count) {
+    explicit Vector(size_type count):_capacity(count), _size(count) {
         _inform = new value_type[count];
         for (unsigned int i = 0; i < count; i++) {
             _inform[i] = 0;
         }
     }
 
-    Vector(size_type count, const value_type& value):_capacity(count),_size(count) {
+    Vector(size_type count, const value_type& value):_capacity(count), _size(count) {
         _inform = new value_type[count];
         for (unsigned int i = 0; i < count; i++) {
             _inform[i] = value;
         }
     }
 
-    Vector(const Vector& other):_capacity(other._size),_size(other._capacity) {
+    Vector(const Vector& other):_capacity(other._size), _size(other._capacity) {
         _inform = new value_type[_capacity];
         for (unsigned int i = 0; i < _size; i++){
             _inform[i] = other._inform[i];
@@ -51,7 +51,7 @@ public:
     }
 
     Vector<T>& operator=(const Vector& other) { 
-        Vector  a(other);
+        Vector a(other);
         this->swap(a);
         return *this;
     }
@@ -139,7 +139,7 @@ public:
             _size++;
         }
         else if (_size == 0) {
-            Vector <T> b(1,value); 
+            Vector <T> b(1, value); 
             this->swap(b);
         }
         else {
@@ -150,13 +150,13 @@ public:
             }
             b [n] = value;
             this->swap(b);
-            _size= n + 1;
+            _size = n + 1;
         }
     }
 
     void swap(Vector& other) {
         std::swap(_inform, other._inform);
-        std::swap(_capacity,other._capacity);
+        std::swap(_capacity, other._capacity);
         std::swap(_size, other._size);
     }
 
