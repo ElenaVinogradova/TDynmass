@@ -16,38 +16,38 @@ public:
     using const_pointer = const value_type*;
 
     Vector():_capacity(0), _size(0) {
-        _inform = 0;
+        _data = 0;
     }
 
     explicit Vector(size_type count):_capacity(count), _size(count) {
-        _inform = new value_type[count];
+        _data = new value_type[count];
         for (unsigned int i = 0; i < count; i++) {
-            _inform[i] = 0;
+            _data[i] = 0;
         }
     }
 
     Vector(size_type count, const value_type& value):_capacity(count), _size(count) {
-        _inform = new value_type[count];
+        _data = new value_type[count];
         for (unsigned int i = 0; i < count; i++) {
-            _inform[i] = value;
+            _data[i] = value;
         }
     }
 
     Vector(const Vector& other):_capacity(other._size), _size(other._capacity) {
-        _inform = new value_type[_capacity];
+        _data = new value_type[_capacity];
         for (unsigned int i = 0; i < _size; i++){
-            _inform[i] = other._inform[i];
+            _data[i] = other._data[i];
         }
     }
 
-    Vector(Vector &&other) noexcept :_size(other._size), _capacity( other._capacity), _inform(other._inform) {
+    Vector(Vector &&other) noexcept :_size(other._size), _capacity( other._capacity), _data(other._data) {
         other._size = 0;
         other._capacity = 0;
-        other._inform = nullptr;
+        other._data = nullptr;
     }
 
     ~Vector() {
-        delete[] _inform;
+        delete[] _data;
     }
 
     Vector<T>& operator=(const Vector& other) { 
@@ -58,60 +58,60 @@ public:
 
     Vector<T>& operator=(Vector&& other) noexcept {
         if (&other != this) {
-                delete[] _inform;
+                delete[] _data;
         }
         _size = other._size;
         _capacity = other._capacity;
-        _inform = other._inform;
+        _data = other._data;
         other._size = 0;
         other._capacity = 0;
-        other._inform = nullptr;
+        other._data = nullptr;
     }
 
     reference operator[](size_type pos) noexcept {
-        return _inform[pos];
+        return _data[pos];
     }
 
     const_reference operator[](size_type pos) const noexcept {
-        return _inform[pos];
+        return _data[pos];
     }
 
     reference at(size_type pos) {
         if (pos >= _size) {
             throw std::out_of_range("positon >= size of vector");
         }
-        return _inform[pos];
+        return _data[pos];
     }
 
     const_reference at(size_type pos) const {
         if (pos >= _size) {
             throw std::out_of_range("positon >= size of vector");
         }
-        return _inform[pos];
+        return _data[pos];
     }
 
     reference front() noexcept {
-        return _inform[0];
+        return _data[0];
     }
 
     const_reference front() const noexcept {
-        return _inform[0];
+        return _data[0];
     }
 
     reference back() noexcept {
-        return _inform[_size - 1];
+        return _data[_size - 1];
     }
 
     const_reference back() const noexcept {
-        return _inform[_size - 1];
+        return _data[_size - 1];
     }
 
     pointer data() noexcept {
-        return _inform;
+        return _data;
     }
 
     const_pointer data() const noexcept {
-        return _inform;
+        return _data;
     }
 
     bool empty() const noexcept {
@@ -135,7 +135,7 @@ public:
 
     void push_back(const value_type& value){
         if (_capacity > _size) {
-            _inform[_size] = value;
+            _data[_size] = value;
             _size++;
         }
         else if (_size == 0) {
@@ -146,7 +146,7 @@ public:
             size_type n = _size;
             Vector <T> b(n * 2); 
             for (unsigned int i = 0; i < n; i++){
-                b._inform[i] = _inform[i];
+                b._data[i] = _data[i];
             }
             b [n] = value;
             this->swap(b);
@@ -155,13 +155,13 @@ public:
     }
 
     void swap(Vector& other) {
-        std::swap(_inform, other._inform);
+        std::swap(_data, other._data);
         std::swap(_capacity, other._capacity);
         std::swap(_size, other._size);
     }
 
 private:
-    value_type* _inform;
+    value_type* _data;
     size_type _size;
     size_type _capacity;
 };
